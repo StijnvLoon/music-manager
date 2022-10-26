@@ -1,0 +1,38 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+$main-primary: mat.define-palette(mat.$teal-palette);
+$main-accent: mat.define-palette(mat.$amber-palette);
+$main-warn: mat.define-palette(mat.$pink-palette);
+
+@font-face {
+    font-family: "Disco";
+    src: local("Disco"), url(assets/fonts/DiscoEverydayValue.ttf) format('truetype');
+}
+@font-face {
+    font-family: "Normal";
+    src: local("Normal"), url(assets/fonts/PartyConfettiRegular-eZOn3.ttf) format('truetype');
+}
+
+.main_theme {
+    cursor: default !important;
+    background-color: #303030;
+    user-select: none;
+
+    $main-typography: mat.define-typography-config(
+        $font-family: "Normal",
+    );
+
+    $main-theme: mat.define-dark-theme(
+        (
+            color: (
+                primary: $main-primary,
+                accent: $main-accent,
+                warn: $main-warn,
+            ),
+            typography: $main-typography,
+        )
+    );
+
+    @include mat.all-component-themes($main-theme);
+}
