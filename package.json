@@ -1,13 +1,11 @@
 {
   "name": "music-manager",
   "version": "0.0.0",
+  "main": "electron/dist/app.js",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "electron": "ng build --base-href ./ && tsc --p electron && electron electron/dist/app.js",
-    "test": "ng test"
+    "build": "ng build --base-href ./ && tsc --p electron",
+    "start": "npm run build && electron electron/dist/app.js",
+    "export": "npm run build && electron-packager ./ MusicManager --platform=win32 --arch=x64 --overwrite"
   },
   "private": true,
   "dependencies": {
@@ -33,12 +31,14 @@
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^18.11.5",
+    "electron-packager": "^17.0.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "keyv": "^4.5.0",
     "typescript": "~4.7.2"
   }
 }
