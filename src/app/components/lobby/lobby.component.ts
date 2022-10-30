@@ -13,11 +13,15 @@ export class LobbyComponent implements OnInit {
         private eventService: EventService
     ) { }
 
-    ngOnInit(): void {
-        this.eventService.send(new ReadDirsEvent({ data: 'C:\\Users\\Stijn van Loon\\Desktop\\temp' }))
-            .then((dirs) => {
-                console.log(dirs)
-            })
+    async ngOnInit() {
+        const event = new ReadDirsEvent()
+        event.requestPackage = {
+            data: 'C:\\Users\\Stijn van Loon\\Desktop\\temp'
+        }
+
+        await this.eventService.send(event)
+
+        console.log(event.responsePackage)
     }
 
 }

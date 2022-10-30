@@ -4,19 +4,12 @@ import { ReadDirsEvent } from "../events/ReadDirsEvent";
 
 export class EventHandler {
 
-    private events: ManagerEvent[] = [
-        new ReadDirsEvent()
-    ]
+    private events: ManagerEvent[]
 
-    constructor(private ipcMain: IpcMain, private win: BrowserWindow) {
-        this.events.forEach((managerEvent) => {
-            this.ipcMain.on(`${managerEvent.identifier}-req`, (event: IpcMainEvent, data: string) => {
-                if(data) {
-                    managerEvent.requestPackage = JSON.parse(data)
-                    managerEvent.perform(this.win)
-                }
-            })
-        })
+    constructor(ipcMain: IpcMain, win: BrowserWindow) {
+        this.events = [
+            new ReadDirsEvent({ win: win, ipcMain: ipcMain })
+        ]
     }
 
 

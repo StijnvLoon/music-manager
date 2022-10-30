@@ -12,16 +12,19 @@ export class EventService {
         private zone: NgZone
     ) { }
 
-    send(managerEvent: ManagerEvent): Promise<ResponsePackage<any>> {
+    send(managerEvent: ManagerEvent): Promise<void> {
 
         return new Promise((resolve, reject) => {
-            electron.ipcRenderer.on(`${managerEvent.identifier}-resp`, (event: any, resultData: string) => {
+            const onData = (event: any, resultData: string) => {
+                electron.ipcRenderer.removeListener(`${managerEvent.identifier}-resp`, onData)
+
                 this.zone.run(() => {
-                    resolve(JSON.parse(resultData))
-                    // TODO
-                    //electron.ipcRenderer.removeListener(managerEvent.identifier, this)
+                    managerEvent.responsePackage = JSON.parse(resultData)
+                    resolve()
                 })
-            })
+            }
+
+            electron.ipcRenderer.on(`${managerEvent.identifier}-resp`, onData)
             electron.ipcRenderer.send(`${managerEvent.identifier}-req`, JSON.stringify(managerEvent.requestPackage))
         })
     }

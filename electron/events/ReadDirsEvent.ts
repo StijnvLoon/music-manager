@@ -1,24 +1,28 @@
-import { BrowserWindow } from "electron";
 import { RequestPackage } from "../utils/RequestPackage";
+import { ResponsePackage } from "../utils/ResponsePackage";
 import { FileHandler } from "../handlers/FileHandler";
 import { ManagerEvent } from "./ManagerEvent";
+import { BrowserWindow, IpcMain } from "electron";
 
-export class ReadDirsEvent implements ManagerEvent {
+export class ReadDirsEvent extends ManagerEvent {
 
     private fileHandler: FileHandler = new FileHandler()
 
-    identifier: string = "ReadDirs"
-    requestPackage: RequestPackage<string> | undefined
+    public identifier: string = "ReadDirs"
+    public requestPackage: RequestPackage<string> | undefined;
+    public responsePackage: ResponsePackage<string[]> | undefined;
 
-    constructor(pack?: RequestPackage<string>) {
-        this.requestPackage = pack
+    constructor(electronData?: { win: BrowserWindow, ipcMain: IpcMain }) {
+        super(electronData)
     }
 
-    perform(win: BrowserWindow) {
-        if (!this.requestPackage) throw `No package found in ${this.identifier}`
+    public perform(): void {
+        this.prePerform()
 
+        //@ts-ignore
         this.fileHandler.retrieveDirs(this.requestPackage.data).then((dirs) => {
-            win.webContents.send(`${this.identifier}-resp`, JSON.stringify(dirs))
+            this.responsePackage = { statusCode: 200, data: dirs }
+            this.sendResponse()
         })
     }
 }
