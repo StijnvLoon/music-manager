@@ -1,8 +1,9 @@
 import { app, BrowserWindow, ipcMain } from "electron";
+import { FileHandler } from './handlers/FileHandler'
 import * as contextMenu from 'electron-context-menu'
 import * as path from "path";
 import * as url from "url";
-import * as fs from "fs";
+import { EventHandler } from "./handlers/EventHandler";
 
 let mainWindow: BrowserWindow | undefined;
 
@@ -18,9 +19,13 @@ contextMenu({
 });
 
 
-function createWindow() {
+async function createWindow() {
     mainWindow = new BrowserWindow({
-        show: false
+        show: false,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
     });
 
     mainWindow.maximize()
@@ -37,6 +42,8 @@ function createWindow() {
     mainWindow.on("closed", () => {
         mainWindow = undefined;
     });
+
+    new EventHandler(ipcMain, mainWindow)
 }
 
 app.on("ready", createWindow);
