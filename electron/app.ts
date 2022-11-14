@@ -18,7 +18,6 @@ contextMenu({
     ]
 });
 
-
 async function createWindow() {
     mainWindow = new BrowserWindow({
         show: false,
@@ -46,6 +45,7 @@ async function createWindow() {
     new EventHandler(ipcMain, mainWindow)
 }
 
+app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096');
 app.on("ready", createWindow);
 
 app.on("activate", () => {

@@ -4,11 +4,14 @@ export class FileHandler {
 
     retrieveDirs(url: string): Promise<string[]> {
         return new Promise((resolve, reject) => {
-            fs.readdir(url, (err, dirs) => {
+            fs.readdir(url, (err, files) => {
                 if(err) {
                     reject(err)
                 } else {
-                    resolve(dirs)
+                    // convert files to full paths
+                    resolve(files.map((file) => {
+                        return url + '\\' + file
+                    }))
                 }
             })
         })

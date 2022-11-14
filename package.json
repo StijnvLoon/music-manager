@@ -5,7 +5,8 @@
   "scripts": {
     "build": "ng build --base-href ./ && tsc --p electron",
     "start": "npm run build && electron electron/dist/app.js",
-    "export": "npm run build && electron-packager ./ MusicManager --platform=win32 --arch=x64 --overwrite"
+    "export": "npm run build && electron-packager ./ MusicManager --platform=win32 --arch=x64 --overwrite",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -19,19 +20,34 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@types/fluent-ffmpeg": "^2.1.20",
     "electron": "^21.2.0",
     "electron-context-menu": "^3.5.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
     "rxjs": "~7.5.0",
+    "stream-browserify": "^3.0.0",
     "tslib": "^2.3.0",
+    "util": "^0.12.5",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "14.1.0",
     "@angular-devkit/build-angular": "^14.2.6",
+    "@angular-eslint/builder": "14.1.2",
+    "@angular-eslint/eslint-plugin": "14.1.2",
+    "@angular-eslint/eslint-plugin-template": "14.1.2",
+    "@angular-eslint/schematics": "14.1.2",
+    "@angular-eslint/template-parser": "14.1.2",
     "@angular/cli": "~14.2.6",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^18.11.5",
+    "@typescript-eslint/eslint-plugin": "5.37.0",
+    "@typescript-eslint/parser": "5.37.0",
     "electron-packager": "^17.0.0",
+    "eslint": "^8.23.1",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -40,10 +56,5 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "keyv": "^4.5.0",
     "typescript": "~4.7.2"
-  },
-  "browser": {
-    "fs": false,
-    "path": false,
-    "os": false
   }
 }
