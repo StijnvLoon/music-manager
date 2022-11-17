@@ -43,3 +43,5 @@ Thumbs.db
 
 # electron
 electron/dist
+
+UserSettings.json

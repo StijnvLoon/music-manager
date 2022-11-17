@@ -1,16 +1,14 @@
-import { RequestPackage } from "../utils/RequestPackage";
-import { ResponsePackage } from "../utils/ResponsePackage";
+import { IRequestPackage } from "../utils/IRequestPackage";
+import { IResponsePackage } from "../utils/IResponsePackage";
 import { FileHandler } from "../handlers/FileHandler";
-import { ManagerEvent } from "./ManagerEvent";
+import { ManagerEvent } from "../model/ManagerEvent";
 import { BrowserWindow, IpcMain } from "electron";
 
 export class ReadDirsEvent extends ManagerEvent {
 
-    private fileHandler: FileHandler = new FileHandler()
-
     public identifier: string = "ReadDirs"
-    public requestPackage: RequestPackage<string> | undefined;
-    public responsePackage: ResponsePackage<string[]> | undefined;
+    public requestPackage: IRequestPackage<string> | undefined;
+    public responsePackage: IResponsePackage<string[]> | undefined;
 
     constructor(electronData?: { win: BrowserWindow, ipcMain: IpcMain }) {
         super(electronData)
@@ -20,7 +18,7 @@ export class ReadDirsEvent extends ManagerEvent {
         this.prePerform()
 
         //@ts-ignore
-        this.fileHandler.retrieveDirs(this.requestPackage.data).then((dirs) => {
+        FileHandler.retrieveDirs(this.requestPackage.data).then((dirs) => {
             this.responsePackage = { statusCode: 200, data: dirs }
             this.sendResponse()
         })

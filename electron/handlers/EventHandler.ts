@@ -1,7 +1,9 @@
-import { BrowserWindow, IpcMain, IpcMainEvent } from "electron";
+import { BrowserWindow, IpcMain } from "electron";
 import { ReadMusicFileEvent } from "../events/ReadMusicFileEvent";
-import { ManagerEvent } from "../events/ManagerEvent";
+import { ManagerEvent } from "../model/ManagerEvent";
 import { ReadDirsEvent } from "../events/ReadDirsEvent";
+import { ReadUserSettingsEvent } from "../events/ReadUserSettingsEvent";
+import { SaveUserSettingsEvent } from "../events/SaveUserSettingsEvent";
 
 export class EventHandler {
 
@@ -10,7 +12,9 @@ export class EventHandler {
     constructor(ipcMain: IpcMain, win: BrowserWindow) {
         this.events = [
             new ReadDirsEvent({ win: win, ipcMain: ipcMain }),
-            new ReadMusicFileEvent({ win: win, ipcMain: ipcMain })
+            new ReadMusicFileEvent({ win: win, ipcMain: ipcMain }),
+            new ReadUserSettingsEvent({ win: win, ipcMain: ipcMain }),
+            new SaveUserSettingsEvent({ win: win, ipcMain: ipcMain })
         ]
     }
 }

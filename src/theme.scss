@@ -10,8 +10,12 @@ $main-warn: mat.define-palette(mat.$pink-palette);
     src: local("Disco"), url(assets/fonts/DiscoEverydayValue.ttf) format('truetype');
 }
 @font-face {
+    font-family: "Party";
+    src: local("Party"), url(assets/fonts/PartyConfettiRegular-eZOn3.ttf) format('truetype');
+}
+@font-face {
     font-family: "Normal";
-    src: local("Normal"), url(assets/fonts/PartyConfettiRegular-eZOn3.ttf) format('truetype');
+    src: local("Normal"), url(assets/fonts/Dosis-VariableFont_wght.ttf) format('truetype');
 }
 
 .main_theme {

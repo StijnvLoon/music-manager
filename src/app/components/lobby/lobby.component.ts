@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ReadDirsEvent } from 'electron/events/ReadDirsEvent';
 import { ReadMusicFileEvent } from 'electron/events/ReadMusicFileEvent';
+import { ReadUserSettingsEvent } from 'electron/events/ReadUserSettingsEvent';
+import { UserSettings } from 'electron/model/UserSettings';
 import { EventService } from 'src/app/services/event.service';
 
 @Component({
@@ -11,13 +14,20 @@ import { EventService } from 'src/app/services/event.service';
 export class LobbyComponent implements OnInit {
 
     constructor(
-        private eventService: EventService
-    ) { }
+        private eventService: EventService,
+        private router: Router
+    ) {
+    }
 
     async ngOnInit() {
+        const settings = await this.retrieverSettings()
 
-        const dirs: string[] = await this.retrieverDirs()
-        const musicData: any = await this.readDir(dirs[1])
+        if (!settings) this.router.navigateByUrl('/setup')
+
+        console.log(settings)
+
+        // const dirs: string[] = await this.retrieverDirs()
+        // const musicData: any = await this.readDir(dirs[1])
 
     }
 
@@ -42,6 +52,13 @@ export class LobbyComponent implements OnInit {
         await this.eventService.send(event)
 
         return event.responsePackage?.data
+    }
+
+    private async retrieverSettings(): Promise<UserSettings | undefined> {
+        const event = new ReadUserSettingsEvent()
+        await this.eventService.send(event)
+        //@ts-ignore
+        return event.responsePackage.data
     }
 
 }

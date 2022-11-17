@@ -1,14 +1,14 @@
 import { BrowserWindow, IpcMain, IpcMainEvent } from "electron"
-import { ResponsePackage } from "../utils/ResponsePackage"
-import { RequestPackage } from "../utils/RequestPackage"
+import { IResponsePackage } from "../utils/IResponsePackage"
+import { IRequestPackage } from "../utils/IRequestPackage"
 
 export abstract class ManagerEvent {
 
     protected electronData: { win: BrowserWindow, ipcMain: IpcMain } | undefined
 
     public abstract readonly identifier: string
-    public abstract requestPackage: RequestPackage<any> | undefined
-    public abstract responsePackage: ResponsePackage<any> | undefined
+    public abstract requestPackage: IRequestPackage<any> | undefined
+    public abstract responsePackage: IResponsePackage<any> | undefined
     public abstract perform(): void
 
     constructor(electronData?: { win: BrowserWindow, ipcMain: IpcMain }) {
@@ -16,8 +16,12 @@ export abstract class ManagerEvent {
 
         setTimeout(() => {
             if (this.electronData) {
-                this.electronData.ipcMain.on(`${this.identifier}-req`, (event: IpcMainEvent, data: string) => {
-                    this.requestPackage = JSON.parse(data)
+                this.electronData.ipcMain.on(`${this.identifier}-req`, (event: IpcMainEvent, data: string | undefined) => {
+                    if(data) {
+                        this.requestPackage = JSON.parse(data)
+                    } else {
+                        this.requestPackage = JSON.parse('{"data": ""}')
+                    }
                     this.perform()
                 })
             }

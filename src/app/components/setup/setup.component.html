@@ -1,0 +1,31 @@
+<div class="background"></div>
+
+<div class="center">
+    <div class="container">
+        <div class="title">Music Manager</div>
+        <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+
+            <mat-form-field class="form_input delay_1" appearance="fill">
+                <mat-label>Music folder location</mat-label>
+                <input matInput formControlName="music_folderControl">
+                <mat-error *ngIf="settingsForm.get('music_folderControl')?.hasError('required')">Is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form_input delay_2" appearance="fill">
+                <mat-label>FFmpeg location</mat-label>
+                <input matInput formControlName="ffmpeg_locationControl">
+                <mat-error *ngIf="settingsForm.get('ffmpeg_locationControl')?.hasError('required')">Is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form_input delay_3" appearance="fill">
+                <mat-label>FFprobe location</mat-label>
+                <input matInput formControlName="ffprobe_locationControl">
+                <mat-error *ngIf="settingsForm.get('ffprobe_locationControl')?.hasError('required')">Is required
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" class="form_input delay_4"
+                [disabled]="settingsForm.invalid">submit</button>
+
+        </form>
+    </div>
+</div>

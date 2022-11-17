@@ -1,11 +1,13 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-import { FileHandler } from './handlers/FileHandler'
 import * as contextMenu from 'electron-context-menu'
 import * as path from "path";
 import * as url from "url";
 import { EventHandler } from "./handlers/EventHandler";
 
 let mainWindow: BrowserWindow | undefined;
+
+app.disableHardwareAcceleration()
+app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096');
 
 contextMenu({
     prepend: (defaultActions, params, browserWindow: any) => [
@@ -45,7 +47,6 @@ async function createWindow() {
     new EventHandler(ipcMain, mainWindow)
 }
 
-app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096');
 app.on("ready", createWindow);
 
 app.on("activate", () => {

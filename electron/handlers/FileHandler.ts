@@ -2,7 +2,7 @@ import * as fs from "fs";
 
 export class FileHandler {
 
-    retrieveDirs(url: string): Promise<string[]> {
+    static retrieveDirs(url: string): Promise<string[]> {
         return new Promise((resolve, reject) => {
             fs.readdir(url, (err, files) => {
                 if(err) {
@@ -17,13 +17,25 @@ export class FileHandler {
         })
     }
 
-    readFile(dir: string): Promise<Buffer> {
+    static readFile(dir: string): Promise<Buffer> {
         return new Promise((resolve, reject) => {
             fs.readFile(dir, (err, data) => {
-                if(err) {
+                if(err || data == undefined) {
                     reject(err)
                 } else {
                     resolve(data)
+                }
+            })
+        })
+    }
+
+    static writeFile(path: string, content: string): Promise<undefined> {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(path, content, (err) => {
+                if(err) {
+                    reject(err)
+                } else {
+                    resolve(undefined)
                 }
             })
         })

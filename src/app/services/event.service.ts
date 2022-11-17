@@ -1,6 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { ManagerEvent } from 'electron/events/ManagerEvent';
-import { ResponsePackage } from 'electron/utils/ResponsePackage';
+import { ManagerEvent } from 'electron/model/ManagerEvent';
 const electron = (<any>window).require('electron');
 
 @Injectable({
