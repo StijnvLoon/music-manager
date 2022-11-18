@@ -1,13 +1,20 @@
 import * as ffmpeg from "fluent-ffmpeg"
+import { UserSettings } from "../model/UserSettings"
+import { FileHandler } from "./FileHandler"
 
 export class FfmpegHandler {
 
     private static _instance: FfmpegHandler
 
     constructor() {
-        // TODO aangeven dat ffmpeg gedownloadmoet worden en doorgegeven
-        ffmpeg.setFfmpegPath("C:\\ffmpeg\\bin\\ffmpeg.exe")
-        ffmpeg.setFfprobePath("C:\\ffmpeg\\bin\\ffprobe.exe")
+        FileHandler.readFileSync("UserSettings.json")
+            .then((file) => {
+                const settings = new UserSettings(JSON.parse(file.toString()))
+                ffmpeg.setFfmpegPath(settings.ffmpegPath)
+                ffmpeg.setFfprobePath(settings.ffprobePath)
+            })
+            .catch(() => { })
+        
     }
 
     public static getInstance(): FfmpegHandler {
@@ -16,7 +23,6 @@ export class FfmpegHandler {
     }
 
     public read(url: string): Promise<any> {
-        console.log(url)
         return new Promise((resolve, reject) => {
             try {
                 try {

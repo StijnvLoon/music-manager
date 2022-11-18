@@ -1,4 +1,4 @@
-<div class="background">
+<!-- <div class="background">
 
 </div>
 
@@ -6,3 +6,19 @@
     <div class="text">Music Manager</div>
 </div>
 
+<app-player></app-player> -->
+
+<div class="vertical_container">
+    <mat-drawer-container class="horizontal_container" autosize>
+        <mat-drawer #explorerDrawer mode="side" opened="true">
+            <app-explorer></app-explorer>
+        </mat-drawer>
+
+        <app-viewer></app-viewer>
+
+        <mat-drawer #editorDrawer mode="side" position="end" opened="true">
+            <app-editor></app-editor>
+        </mat-drawer>
+    </mat-drawer-container>
+    <app-player></app-player>
+</div>

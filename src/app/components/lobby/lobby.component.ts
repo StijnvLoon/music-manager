@@ -21,20 +21,19 @@ export class LobbyComponent implements OnInit {
 
     async ngOnInit() {
         const settings = await this.retrieverSettings()
-
         if (!settings) this.router.navigateByUrl('/setup')
 
-        console.log(settings)
-
-        // const dirs: string[] = await this.retrieverDirs()
-        // const musicData: any = await this.readDir(dirs[1])
+        // //@ts-ignore
+        // const dirs: string[] = await this.retrieverDirs(settings?.musicFolderPath)
+        // const musicData: any = await this.readDir(dirs[5])
+        // console.log(musicData)
 
     }
 
-    private async retrieverDirs(): Promise<string[]> {
+    private async retrieverDirs(dir: string): Promise<string[]> {
         const event = new ReadDirsEvent()
         event.requestPackage = {
-            data: 'C:\\Users\\Stijn van Loon\\Desktop\\temp'
+            data: dir
         }
 
         await this.eventService.send(event)

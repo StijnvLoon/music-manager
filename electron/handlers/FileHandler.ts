@@ -29,6 +29,17 @@ export class FileHandler {
         })
     }
 
+    static readFileSync(dir: string): Promise<Buffer> {
+        return new Promise((resolve, reject) => {
+            const res = fs.readFileSync(dir)
+            if(res) {
+                resolve(res)
+            } else {
+                reject()
+            }
+        })
+    }
+
     static writeFile(path: string, content: string): Promise<undefined> {
         return new Promise((resolve, reject) => {
             fs.writeFile(path, content, (err) => {
