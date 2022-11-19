@@ -11,6 +11,8 @@ import { PlayerComponent } from './components/player/player.component';
 import { EditorComponent } from './components/editor/editor.component';
 import { ExplorerComponent } from './components/explorer/explorer.component';
 import { ViewerComponent } from './components/viewer/viewer.component';
+import { IconComponent } from './components/shared/icon/icon.component';
+import { SeekerComponent } from './components/player/seeker/seeker.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ViewerComponent } from './components/viewer/viewer.component';
     PlayerComponent,
     EditorComponent,
     ExplorerComponent,
-    ViewerComponent
+    ViewerComponent,
+    IconComponent,
+    SeekerComponent
   ],
   imports: [
     BrowserModule,

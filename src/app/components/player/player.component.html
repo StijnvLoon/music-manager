@@ -1,6 +1,22 @@
-<!-- <audio controls>
-    <source id="audioSrc" src="" type="audio/mpeg">
-</audio> -->
 <div class="container">
+    <div class="player mat-elevation-z3">
+        <div class="player_buttons">
+            <div class="icon_button icon_button_small" [class.icon_button_disabled]="!history.hasPrevious" matRipple (click)="previous()">
+                <app-icon [name]="'previous_white'"></app-icon>
+            </div>
 
+            <div class="icon_button" matRipple (click)="toggle()">
+                <app-icon [name]="'play_white'" *ngIf="!isPlaying" @IconTransitionAnim></app-icon>
+                <app-icon [name]="'pause_white'" *ngIf="isPlaying" @IconTransitionAnim></app-icon>
+            </div>
+
+            <div class="icon_button icon_button_small" matRipple (click)="next()">
+                <app-icon [name]="'next_white'"></app-icon>
+            </div>
+        </div>
+
+        <div class="player_seeker">
+            <app-seeker [audio]="audio"></app-seeker>
+        </div>
+    </div>
 </div>

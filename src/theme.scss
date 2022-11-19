@@ -1,9 +1,9 @@
 @use "@angular/material" as mat;
 @include mat.core();
 
-$main-primary: mat.define-palette(mat.$teal-palette);
-$main-accent: mat.define-palette(mat.$amber-palette);
-$main-warn: mat.define-palette(mat.$pink-palette);
+$primaryPalette: mat.define-palette(mat.$teal-palette);
+$accentPalette: mat.define-palette(mat.$amber-palette);
+$warnPalette: mat.define-palette(mat.$pink-palette);
 
 @font-face {
     font-family: "Disco";
@@ -30,9 +30,9 @@ $main-warn: mat.define-palette(mat.$pink-palette);
     $main-theme: mat.define-dark-theme(
         (
             color: (
-                primary: $main-primary,
-                accent: $main-accent,
-                warn: $main-warn,
+                primary: $primaryPalette,
+                accent: $accentPalette,
+                warn: $warnPalette,
             ),
             typography: $main-typography,
         )

@@ -1,0 +1,5 @@
+<div class="container">
+    <div class="time">{{audioProgress}}</div>
+    <input type="range" class="seeker" #seeker [max]="seekerMax" [value]="seekerProgress" (input)="updateProgress(seeker.value)">
+    <div class="time">{{audioLength}}</div>
+</div>
