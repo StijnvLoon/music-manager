@@ -1,0 +1,33 @@
+:host {
+    width: inherit;
+}
+.folder {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s;
+    border-radius: 2px;
+    padding: 2px;
+}
+.folder div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.folder:hover {
+    background-color: rgba(255, 255, 255, 0.265);
+}
+.expand_icon {
+    transform: rotate(-90deg);
+    transition: transform 0.3s ease;
+}
+.expand_icon_open {
+    transform: rotate(0deg);
+}
+
+.contents {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}

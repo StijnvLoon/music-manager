@@ -1,0 +1,11 @@
+<div class="folder" (click)="toggleFolder()">
+    <div>
+        <app-icon [name]="'folder_open_white'" *ngIf="opened" style="position: unset;"></app-icon>
+        <app-icon [name]="'folder_white'" *ngIf="!opened" style="position: unset;"></app-icon>
+        <div>{{directory.name}}</div>
+    </div>
+    <app-icon [name]="'expand_white'" style="position: unset; background-color: unset;" class="expand_icon" [class.expand_icon_open]="opened"></app-icon>
+</div>
+<div class="contents" *ngIf="opened" >
+    <app-dir-folder *ngFor="let folder of folders" [directory]="folder"></app-dir-folder>
+</div>

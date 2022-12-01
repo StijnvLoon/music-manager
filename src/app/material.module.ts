@@ -25,6 +25,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTreeModule } from '@angular/material/tree';
 
 @NgModule({
     declarations: [],
@@ -54,7 +55,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
         MatDatepickerModule,
         MatNativeDateModule,
         MatStepperModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatTreeModule
     ]
 })
 export class MaterialModule { }

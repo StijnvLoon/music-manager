@@ -13,6 +13,7 @@ import { ExplorerComponent } from './components/explorer/explorer.component';
 import { ViewerComponent } from './components/viewer/viewer.component';
 import { IconComponent } from './components/shared/icon/icon.component';
 import { SeekerComponent } from './components/player/seeker/seeker.component';
+import { DirFolderComponent } from './components/explorer/dir-folder/dir-folder.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SeekerComponent } from './components/player/seeker/seeker.component';
     ExplorerComponent,
     ViewerComponent,
     IconComponent,
-    SeekerComponent
+    SeekerComponent,
+    DirFolderComponent
   ],
   imports: [
     BrowserModule,

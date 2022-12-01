@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
 @import "./theme.scss";
 
 body {
@@ -14,4 +15,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+*::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+    background: mat.get-color-from-palette($accentPalette, 300);
+}
+*::-webkit-scrollbar-thumb:hover {
+    background: mat.get-color-from-palette($accentPalette, 500);
 }

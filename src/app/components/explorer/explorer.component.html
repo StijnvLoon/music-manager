@@ -1,3 +1,8 @@
 <div class="container">
-
+    <div class="header mat-elevation-z2">
+        Explorer
+    </div>
+    <div class="nodes">
+        <app-dir-folder *ngFor="let folder of folders" [directory]="folder"></app-dir-folder>
+    </div>
 </div>
