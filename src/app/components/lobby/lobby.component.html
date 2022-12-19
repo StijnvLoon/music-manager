@@ -4,7 +4,7 @@
             <app-explorer></app-explorer>
         </mat-drawer>
 
-        <app-viewer></app-viewer>
+        <app-viewer [explorerDrawer]="explorerDrawer"></app-viewer>
 
         <mat-drawer #editorDrawer mode="side" position="end" opened="true">
             <app-editor></app-editor>

@@ -1,4 +1,19 @@
 <div class="container">
+    <div class="header">
+        <button mat-raised-button color="primary" (click)="explorerDrawer.toggle()">
+            {{explorerDrawer.opened ? 'Close' : 'Open'}} explorer
+        </button>
 
-
+        <h2>{{selectedAlbum}}</h2>
+    </div>
+    <div class="files">
+        <div *ngFor="let file of musicFiles" class="music_file" [matTooltip]="file.name">
+            <div class="center">
+                <img class="music_file-img" src="assets/icons/audio_file_white.svg">
+            </div>
+            <div>
+                <div class="music_file-name">{{file.name}}</div>
+            </div>
+        </div>
+    </div>
 </div>

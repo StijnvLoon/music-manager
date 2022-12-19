@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Directory } from 'electron/model/Directory';
-import { listContainerAnim, listItemsAnim } from 'src/app/animations/DefaultAnims';
 import { DirectoryService } from 'src/app/services/directory.service';
+import { ViewerService } from 'src/app/services/viewer.service';
 
 @Component({
   selector: 'app-dir-folder',
   templateUrl: './dir-folder.component.html',
   styleUrls: ['./dir-folder.component.scss'],
 })
-export class DirFolderComponent implements OnInit {
+export class DirFolderComponent {
 
     @Input() directory!: Directory
     @Input() level: number = 1
@@ -17,15 +17,13 @@ export class DirFolderComponent implements OnInit {
     folders: Directory[] = []
 
     constructor(
-        private directoryService: DirectoryService
+        private directoryService: DirectoryService,
+        private viewerService: ViewerService
     ) { }
-
-    ngOnInit(): void {
-
-    }
     
     toggleFolder() {
         this.opened = !this.opened
+        this.viewerService.changeAlbum(this.directory)
         if(this.opened) this.loadContent() 
     }
 
